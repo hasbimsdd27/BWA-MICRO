@@ -3,6 +3,6 @@ const axios = require("axios");
 module.exports = (baseURL) => {
   return axios.create({
     baseURL,
-    timeout: Number(process.env.TIMEOUT),
+    timeout: parseInt(process.env.TIMEOUT),
   });
 };
