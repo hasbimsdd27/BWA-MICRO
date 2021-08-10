@@ -15,4 +15,9 @@ class Review extends Model
     public function course(){
         return $this->belongsTo('App\Course');
     }
+
+    protected $casts = [
+        'created_at' => 'datetime:Y-m-d H:m:s',
+        'updated_at' => 'datetime:Y-m-d H:m:s',
+    ];
 }
