@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Course extends Model
 {
+    protected $casts = [
+        'created_at' => 'datetime:Y-m-d H:m:s',
+        'updated_at' => 'datetime:Y-m-d H:m:s',
+    ];
+    
     protected $table = 'courses';
 
     protected $fillable = [

@@ -14,6 +14,27 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::post('mentors', 'MentorController@create');
+Route::put('mentors/{id}', 'MentorController@update');
+Route::get('mentors', 'MentorController@index');
+Route::get('mentors/{id}', 'MentorController@show');
+Route::delete('mentors/{id}', 'MentorController@destroy');
+
+Route::post('courses', 'CourseController@create');
+Route::put('courses/{id}', 'CourseController@update');
+Route::get('courses', 'CourseController@index');
+Route::delete('courses/{id}', 'CourseController@destroy');
+
+Route::post('chapters', 'ChapterController@create');
+Route::put('chapters/{id}', 'ChapterController@update');
+Route::get('chapters', 'ChapterController@index');
+Route::get('chapters/{id}', 'ChapterController@show');
+Route::delete('chapters/{id}', 'ChapterController@destroy');
+
+Route::post('lessons', 'LessonController@create');
+Route::put('lessons/{id}', 'LessonController@update');
+Route::get('lessons', 'LessonController@index');
+Route::get('lessons/{id}', 'LessonController@show');
+Route::delete('lessons/{id}', 'LessonController@destroy');
+
+
