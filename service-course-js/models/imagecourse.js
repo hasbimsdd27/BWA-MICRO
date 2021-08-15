@@ -1,28 +1,22 @@
 "use strict";
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
-  class Chapter extends Model {
+  class ImageCourse extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Chapter.belongsTo(models.Course, {
+      ImageCourse.belongsTo(models.Course, {
         foreignKey: "course_id",
         sourceKey: "id",
       });
-      Chapter.hasMany(models.Lesson, {
-        foreignKey: "chapter_id",
-        sourceKey: "id",
-        as: "lessons",
-        onDelete: "cascade",
-      });
     }
   }
-  Chapter.init(
+  ImageCourse.init(
     {
-      name: DataTypes.STRING,
+      image: DataTypes.STRING,
       course_id: DataTypes.INTEGER,
       createdAt: {
         type: DataTypes.DATE,
@@ -31,15 +25,15 @@ module.exports = (sequelize, DataTypes) => {
       },
       updatedAt: {
         type: DataTypes.DATE,
-        field: "created_at",
+        field: "updated_at",
         allowNull: false,
       },
     },
     {
       sequelize,
-      modelName: "Chapter",
-      tableName: "chapters",
+      modelName: "ImageCourse",
+      tableName: "image_courses",
     }
   );
-  return Chapter;
+  return ImageCourse;
 };

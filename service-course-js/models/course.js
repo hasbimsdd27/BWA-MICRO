@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
       Course.belongsTo(models.Mentor, {
         foreignKey: "mentor_id",
         sourceKey: "id",
-        as: "mentor_detail",
+        as: "mentor",
       });
 
       Course.hasMany(models.Chapter, {
@@ -34,6 +34,13 @@ module.exports = (sequelize, DataTypes) => {
         as: "reviews",
         onDelete: "cascade",
       });
+
+      Course.hasMany(models.ImageCourse, {
+        foreignKey: "course_id",
+        sourceKey: "id",
+        as: "images",
+        onDelete: "cascade",
+      });
     }
   }
   Course.init(
@@ -54,7 +61,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       updatedAt: {
         type: DataTypes.DATE,
-        field: "created_at",
+        field: "updated_at",
         allowNull: false,
       },
     },
