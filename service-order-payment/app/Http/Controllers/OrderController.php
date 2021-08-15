@@ -8,6 +8,20 @@ use Illuminate\Support\Str;
 
 class OrderController extends Controller
 {
+    public function index(Request $request){
+        $userId = $request->input('user_id');
+        $orders = Order::query();
+
+        $orders->when($userId, function($query) use ($userId){
+            return $query->where('user_id','=',$userId);
+        });
+
+        return response()->json([
+            'status'=>'success',
+            'data'=>$orders->get()
+        ]);
+    }
+
     public function create(Request $request){
         $user = $request->input('user');
         $course = $request->input('course');
@@ -18,7 +32,7 @@ class OrderController extends Controller
         ]);
 
         $transactionDetails = [
-            'order_id' => $order->id.Str::random(5),
+            'order_id' => $order->id.'-'.Str::random(5),
             'gross_amount' => $course['price']
         ];
 

@@ -12,10 +12,9 @@ const imageCoursesRouter = require("./routes/imageCourses");
 const myCoursesRouter = require("./routes/myCourses");
 const reviewsRouter = require("./routes/reviews");
 const mediaRouter = require("./routes/media");
-const orderRouter = require("./routes/orders");
-const paymentRouter = require("./routes/payments");
 const mentortRouter = require("./routes/mentors");
 const refreshTokenRouter = require("./routes/refreshToken");
+const webhookRouter = require("./routes/webhook");
 
 //middleware
 const verifyToken = require("./middleware/verifyToken");
@@ -27,7 +26,6 @@ app.use(logger("dev"));
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ extended: false, limit: "50mb" }));
 
-app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/courses", courseRouter);
 app.use("/chapters", verifyToken, chapterRouter);
@@ -36,10 +34,9 @@ app.use("/image-courses", verifyToken, imageCoursesRouter);
 app.use("/my-courses", verifyToken, myCoursesRouter);
 app.use("/reviews", verifyToken, reviewsRouter);
 app.use("/media", mediaRouter);
-app.use("/orders", orderRouter);
-app.use("/payments", paymentRouter);
 app.use("/refresh-tokens", refreshTokenRouter);
 app.use("/mentors", verifyToken, mentortRouter);
+app.use("/webhook", webhookRouter);
 
 app.listen(PORT, () => {
   console.log(`App running in port ${PORT}`);

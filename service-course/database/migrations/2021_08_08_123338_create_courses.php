@@ -20,7 +20,7 @@ class CreateCourses extends Migration
             $table->string('thumbnail')->nullable();
             $table->enum('type',['free', 'premium']);
             $table->enum('status', ['draft', 'published']);
-            $table->integer('proce')->default(0)->nullable();
+            $table->integer('price')->default(0)->nullable();
             $table->enum('level',['all level', 'beginner', 'intermediate', 'advance']);
             $table->longText('description')->nullable();
             $table->foreignId('mentor_id')->constrained('mentors')->onDelete('cascade');

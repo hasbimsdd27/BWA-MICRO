@@ -107,6 +107,14 @@ class CourseController extends Controller
                 'message'=> 'mentor not found'
             ], 404);
         }
+        $type = $request->input('type');
+
+        if($type === 'premium' && $course->price === 0){
+            return response()->json([
+                'status' => 'error',
+                'message' => 'price cannot be 0'
+            ], 400);
+        }
 
         $course = Course::create($data);
 
