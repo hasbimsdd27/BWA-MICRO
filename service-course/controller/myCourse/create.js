@@ -1,6 +1,7 @@
 const { Course, MyCourse } = require("../../models");
 const Validator = require("fastest-validator");
 const { getUser } = require("../../utils/getUserId");
+const { createOrder } = require("../../utils/createPaymentLink");
 const v = new Validator();
 
 module.exports = async (req, res) => {
@@ -48,15 +49,22 @@ module.exports = async (req, res) => {
     }
 
     if (course.type === "premium") {
-      //logic payment
+      try {
+        const response = await createOrder({
+          user,
+          course,
+        });
+        return res.send({ status: "success", data: response.data });
+      } catch (error) {
+        return res.status(error.response.status).send(error.response.data);
+      }
+    } else {
+      const data = await MyCourse.create(req.body);
+      return res.send({
+        status: "success",
+        data,
+      });
     }
-
-    const data = await MyCourse.create(req.body);
-
-    return res.send({
-      status: "success",
-      data,
-    });
   } catch (error) {
     return res.status(400).send({ status: "error", message: error.message });
   }

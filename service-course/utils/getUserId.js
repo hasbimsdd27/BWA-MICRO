@@ -1,6 +1,6 @@
 const axios = require("./axios");
 
-const api = axios(process.env.URL_SERVICE_COURSE);
+const api = axios(process.env.URL_SERVICE_USER);
 
 const serviceDownResponse = {
   response: {
